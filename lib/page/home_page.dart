@@ -1,7 +1,5 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_styled/padding_extension.dart';
 import 'package:flutter_styled/radius_extension.dart';
 import 'package:flutter_styled/size_extension.dart';
