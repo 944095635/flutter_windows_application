@@ -46,26 +46,23 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: SingleChildScrollView(
                   child: Wrap(
+                    alignment: WrapAlignment.center,
                     runSpacing: 20,
+                    spacing: 10,
                     children: [
                       buildChart(),
-                      40.horizontalSpace,
                       buildChart1(),
-                      40.horizontalSpace,
                       buildChart2(),
-                      40.horizontalSpace,
                       buildCard(
                         msg: "2000.00\$",
                         button: "Total",
                         color: const Color(0xFFECF1FF),
                       ),
-                      40.horizontalSpace,
                       buildCard(
                         msg: "400\$",
                         button: "See",
                         color: const Color(0xFFfff6f2),
                       ),
-                      40.horizontalSpace,
                       buildCard(
                         msg: "87\$",
                         button: "What?",
