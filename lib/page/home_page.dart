@@ -43,33 +43,37 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               //内容区域
-              Wrap(
-                runSpacing: 20,
-                children: [
-                  buildChart(),
-                  40.horizontalSpace,
-                  buildChart1(),
-                  40.horizontalSpace,
-                  buildChart2(),
-                  40.horizontalSpace,
-                  buildCard(
-                    msg: "2000.00\$",
-                    button: "Total",
-                    color: const Color(0xFFECF1FF),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Wrap(
+                    runSpacing: 20,
+                    children: [
+                      buildChart(),
+                      40.horizontalSpace,
+                      buildChart1(),
+                      40.horizontalSpace,
+                      buildChart2(),
+                      40.horizontalSpace,
+                      buildCard(
+                        msg: "2000.00\$",
+                        button: "Total",
+                        color: const Color(0xFFECF1FF),
+                      ),
+                      40.horizontalSpace,
+                      buildCard(
+                        msg: "400\$",
+                        button: "See",
+                        color: const Color(0xFFfff6f2),
+                      ),
+                      40.horizontalSpace,
+                      buildCard(
+                        msg: "87\$",
+                        button: "What?",
+                        color: const Color(0xFFf1ecfe),
+                      ),
+                    ],
                   ),
-                  40.horizontalSpace,
-                  buildCard(
-                    msg: "400\$",
-                    button: "See",
-                    color: const Color(0xFFfff6f2),
-                  ),
-                  40.horizontalSpace,
-                  buildCard(
-                    msg: "87\$",
-                    button: "What?",
-                    color: const Color(0xFFf1ecfe),
-                  ),
-                ],
+                ),
               )
             ],
           ),
