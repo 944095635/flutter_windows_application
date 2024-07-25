@@ -1,4 +1,4 @@
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_styled/padding_extension.dart';
 import 'package:flutter_styled/radius_extension.dart';
@@ -17,31 +17,34 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.transparent,
+        title: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              buildUserCard(),
+              10.horizontalSpace,
+              const Text(
+                "Dream Machine",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "ITCAvantGarde",
+                  fontSize: 20,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Stack(
         fit: StackFit.expand,
         children: [
           Image.asset("images/bg.webp"),
           Column(
             children: [
-              paddingHV(
-                80,
-                30,
-                child: Row(
-                  children: [
-                    const Spacer(),
-                    buildUserCard(),
-                    10.horizontalSpace,
-                    const Text(
-                      "Dream Machine",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "ITCAvantGarde",
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               //内容区域
               Expanded(
                 child: SingleChildScrollView(
@@ -79,6 +82,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  double? width = Platform.isWindows ? 340 : null;
+
   Widget buildUserCard() {
     return const CircleAvatar(
       foregroundImage: NetworkImage(
@@ -89,9 +94,10 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildChart() {
     return Container(
-      width: 340,
+      width: width,
       height: 280,
-      padding: 10.around,
+      margin: 10.around,
+      padding: 20.around,
       decoration: BoxDecoration(
         borderRadius: 10.borderRadius,
         color: const Color(0xFF5F0EED),
@@ -281,8 +287,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildChart1() {
     return Container(
-      width: 340,
+      width: width,
       height: 280,
+      margin: 10.around,
       padding: 20.around,
       decoration: BoxDecoration(
         borderRadius: 10.borderRadius,
@@ -333,31 +340,34 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Expanded(
-            child: SfCartesianChart(
-              plotAreaBorderWidth: 0,
-              //X轴方向的样式
-              primaryXAxis: const CategoryAxis(
-                //分割线
-                //majorGridLines: MajorGridLines(width: 0),
-                //刻度线
-                majorTickLines: MajorTickLines(width: 0),
-                //主轴线
-                axisLine: AxisLine(width: 0),
-                labelPosition: ChartDataLabelPosition.inside,
-                labelPlacement: LabelPlacement.onTicks,
-                labelIntersectAction: AxisLabelIntersectAction.hide,
-                labelsExtent: 0,
-                //labelsExtent: 0,
+            child: IgnorePointer(
+              child: SfCartesianChart(
+                plotAreaBorderWidth: 0,
+                //X轴方向的样式
+                primaryXAxis: const CategoryAxis(
+                  //分割线
+                  //majorGridLines: MajorGridLines(width: 0),
+                  //刻度线
+                  majorTickLines: MajorTickLines(width: 0),
+                  //主轴线
+                  axisLine: AxisLine(width: 0),
+                  labelPosition: ChartDataLabelPosition.inside,
+                  labelPlacement: LabelPlacement.onTicks,
+                  labelIntersectAction: AxisLabelIntersectAction.hide,
+                  labelsExtent: 0,
+                  
+                  //labelsExtent: 0,
+                ),
+                primaryYAxis: const NumericAxis(
+                  isVisible: false,
+                ),
+                series: _getDefaultColumnSeries1(),
+                // tooltipBehavior: TooltipBehavior(
+                //   enable: true,
+                //   header: '',
+                //   canShowMarker: false,
+                // ),
               ),
-              primaryYAxis: const NumericAxis(
-                isVisible: false,
-              ),
-              series: _getDefaultColumnSeries1(),
-              // tooltipBehavior: TooltipBehavior(
-              //   enable: true,
-              //   header: '',
-              //   canShowMarker: false,
-              // ),
             ),
           ),
         ],
@@ -369,6 +379,7 @@ class _HomePageState extends State<HomePage> {
   List<SplineSeries<ChartSampleData, String>> _getDefaultColumnSeries1() {
     return <SplineSeries<ChartSampleData, String>>[
       SplineSeries<ChartSampleData, String>(
+        
         dataSource: <ChartSampleData>[
           ChartSampleData(x: '周一', y: 88),
           ChartSampleData(x: '周二', y: 80),
@@ -387,6 +398,8 @@ class _HomePageState extends State<HomePage> {
         pointColorMapper: (ChartSampleData sales, _) =>
             sales.color ?? const Color(0xFFFF3865),
         width: 5,
+        enableTooltip: false,
+        
       ),
       SplineSeries<ChartSampleData, String>(
         dataSource: <ChartSampleData>[
@@ -412,8 +425,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildChart2() {
     return Container(
-      width: 340,
+      width: width,
       height: 280,
+      margin: 10.around,
       padding: 20.around,
       decoration: BoxDecoration(
         borderRadius: 10.borderRadius,
